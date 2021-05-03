@@ -1,12 +1,45 @@
 from flask import Flask,render_template,request,redirect,g,url_for,session
 from flask_mysqldb import MySQL
 from items import *
+from items.user import *
 
 import os
 
 app.secret_key = os.urandom(24)
 
 @app.route('/',methods=['GET','POST'])
+def login():
+    global loguser
+
+    if request.method == 'POST':
+        userid = request.form['nim']
+        password = request.form['password']
+
+        cur = mysql.connection.cursor()
+        cur.execute('select * from admin')
+        admin = cur.fetchall()
+
+        for i in range(len(admin)):
+            if str(admin[i][3]) == str(password):
+                print(admin[i][3])
+                print(password)
+                loguser = user(admin[i][0],admin[i][1],admin[i][2])
+                print(loguser)
+                return redirect(url_for('menu'))
+        
+
+    return render_template('index.html')
+
+
+@app.route('/menu',methods=['GET','POST'])
+def menu():
+    if loguser.nim() == "":
+        return "blm login"
+
+    else:
+        return render_template('menu.html')
+
+@app.route('/inputorder',methods=['GET','POST'])
 def index():
     
     if request.method == 'POST':
@@ -35,4 +68,9 @@ def index():
 
         return "loh loh loh"
         
-    return render_template('index.html')
+    return render_template('inputorder.html')
+
+@app.route('/lpage',methods=['POST','GET'])
+def lpage():
+    if loguser.nim() == "":
+        return "login duls"
