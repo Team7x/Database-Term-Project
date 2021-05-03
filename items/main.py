@@ -26,7 +26,9 @@ def index():
 
         cur = mysql.connection.cursor()
 
-        cur.execute("INSERT INTO order2 (resi,namaPengirim,namaPenerima,no_telp_pengirim,no_telp_penerima,alamat_penerima,beratBarang,tgl_pengiriman,hargaTotal,nip,id_kota,id_status,estimasi) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (a,b,c,d,e,f,g,h,i,j,k,l,m))
+        cur.execute("""INSERT INTO order2 (resi,namaPengirim,namaPenerima,no_telp_pengirim,
+        no_telp_penerima,alamat_penerima,beratBarang,tgl_pengiriman,hargaTotal,nip,id_kota,id_status,estimasi) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (a,b,c,d,e,f,g,h,i,j,k,l,m))
         mysql.connection.commit()
 
         cur.close()
