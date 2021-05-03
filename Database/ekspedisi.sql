@@ -79,10 +79,10 @@ CREATE TABLE `kurir` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Table structure for table `order2`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE `order2` (
   `resi` varchar(20) NOT NULL,
   `namaPengirim` varchar(50) NOT NULL,
   `namaPenerima` varchar(50) NOT NULL,
@@ -145,9 +145,9 @@ ALTER TABLE `kurir`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `order`
+-- Indexes for table `order2`
 --
-ALTER TABLE `order`
+ALTER TABLE `order2`
   ADD PRIMARY KEY (`resi`);
 
 --
