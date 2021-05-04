@@ -6,3 +6,6 @@ class user:
 
     def nim(self):
         return self.__nim
+    
+    def name(self):
+        return self.__name

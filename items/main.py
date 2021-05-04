@@ -39,7 +39,7 @@ def menu():
     else:
         return render_template('menu.html')
 
-@app.route('/inputorder',methods=['GET','POST'])
+@app.route('/input/order',methods=['GET','POST'])
 def index():
     
     if request.method == 'POST':
@@ -68,9 +68,53 @@ def index():
 
         return "loh loh loh"
         
-    return render_template('inputorder.html')
+    return render_template('/input/order.html')
 
-@app.route('/lpage',methods=['POST','GET'])
-def lpage():
-    if loguser.nim() == "":
-        return "login duls"
+
+#SHOW
+
+@app.route('/show',methods=['POST','GET'])
+def show():
+    
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('show.html')
+    else:
+        return render_template('show.html')
+    
+
+@app.route('/show/kota',methods=['POST','GET'])
+def showkota():
+    
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('/show/kota.html')
+    else:
+        return render_template('/show/kota.html')
+
+@app.route('/show/order',methods=['POST','GET'])
+def showorder():
+    
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('/show/order.html')
+    else:
+        return render_template('/show/order.html')
+
+
+@app.route('/show/kurir',methods=['POST','GET'])
+def showkurir():
+    
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('/show/kurir.html')
+    else:
+        return render_template('/show/kurir.html')
