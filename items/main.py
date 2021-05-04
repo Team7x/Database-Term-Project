@@ -94,7 +94,12 @@ def showkota():
         else:
             return render_template('/show/kota.html')
     else:
-        return render_template('/show/kota.html')
+        cur = mysql.connection.cursor()
+        cur.execute(f'select * from kota')
+        kota = cur.fetchall()
+        cur.close()
+
+        return render_template('/show/kota.html', kota=kota)
 
 @app.route('/show/order',methods=['POST','GET'])
 def showorder():
@@ -105,7 +110,12 @@ def showorder():
         else:
             return render_template('/show/order.html')
     else:
-        return render_template('/show/order.html')
+        cur = mysql.connection.cursor()
+        cur.execute(f'select * from order2')
+        order2 = cur.fetchall()
+        cur.close()
+
+        return render_template('/show/order.html',order2=order2)
 
 
 @app.route('/show/kurir',methods=['POST','GET'])
@@ -117,4 +127,8 @@ def showkurir():
         else:
             return render_template('/show/kurir.html')
     else:
-        return render_template('/show/kurir.html')
+        cur = mysql.connection.cursor()
+        cur.execute(f'select * from kurir')
+        kurir = cur.fetchall()
+        cur.close()
+        return render_template('/show/kurir.html',kurir=kurir)
