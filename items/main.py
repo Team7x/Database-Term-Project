@@ -39,8 +39,11 @@ def menu():
     else:
         return render_template('menu.html')
 
+
+# INPUT 
+
 @app.route('/input/order',methods=['GET','POST'])
-def index():
+def inputorder():
     
     if request.method == 'POST':
         a = request.form['resi']
@@ -69,6 +72,42 @@ def index():
         return "loh loh loh"
         
     return render_template('/input/order.html')
+
+@app.route('/input/kurir',methods=['GET', 'POST'])
+def inputkurir():
+
+    if request.method == "POST":
+        a = request.form['nip']
+        b = request.form['nama']
+        c = request.form['tgl_masuk']
+        d = request.form['alamat']
+        e = request.form['notel']
+        f = request.form['lama']
+        g = request.form['id_tipe']
+
+        cur = mysql.connection.commit()
+        cur.execute(f"insert into kurir ('{a}','{b}','{c}','{d}','{e}','{f}','{g}')")
+        cur.connection.commit()
+        cur.close()
+
+        return "BERHASIL MENAMBAH KURIR!"
+    
+    return render_template('/input/kurir.html')
+
+@app.route('/input/kota',methods=['GET','POST'])
+def inputkota():
+
+    if request.method == "POST":
+        a = request.form['id_kota']
+        b = request.form['namakota']
+        c = request.form['hargakota']
+
+        cur = mysql.connection.commit()
+        cur.execute(f"insert into kota ('{a}','{b}','{c}')")
+        cur.connection.commit()
+        cur.close()
+
+    return render_template('/input/kota.html')
 
 
 #SHOW
