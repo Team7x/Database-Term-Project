@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,redirect,g,url_for,session
 from flask_mysqldb import MySQL
 from items import *
 from items.user import *
+import datetime
 
 import os
 
@@ -53,18 +54,38 @@ def inputorder():
         e = request.form['notelppenerima']
         f = request.form['alamatpenerima']
         g = request.form['beratbarang']
-        h = request.form['tgl']
-        i = request.form['harga']
         j = request.form['nip']
         k = request.form['id_kota']
-        l = request.form['id_status']
-        m = request.form['estimasi']
 
+        cur = mysql.connection.cursor()
+        cur.execute(f"select id_tipe from kurir where nip='{j}'")
+        idtipe= cur.fetchall()
+        idtipe= idtipe[0][0]
+
+        cur.execute(f"select hargaTipe,lama from tipe where id_tipe='{idtipe}'")
+        hargaTipeLama = cur.fetchall()
+
+        hargaTipe = hargaTipeLama[0][0]
+        lama= hargaTipeLama[0][1]
+        hargaTipe = float(hargaTipe)/2
+
+        cur.execute(f"select hargaKota from kota where id_kota='{k}'")
+        KotaLama = cur.fetchall()
+        Kota=KotaLama[0][0]
+
+        hargaTipe = hargaTipe * int(g) * int(Kota)
+
+
+        x = datetime.datetime.now()
+        tgl = (f'{x.year}-{x.month}-{int(x.day)+lama}')
+        print(tgl)
+
+        cur.close()
         cur = mysql.connection.cursor()
 
         cur.execute("""INSERT INTO order2 (resi,namaPengirim,namaPenerima,no_telp_pengirim,
         no_telp_penerima,alamat_penerima,beratBarang,tgl_pengiriman,hargaTotal,nip,id_kota,id_status,estimasi) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (a,b,c,d,e,f,g,h,i,j,k,l,m))
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (a,b,c,d,e,f,g,datetime.date.today(),hargaTipe,j,k,'0',tgl))
         mysql.connection.commit()
 
         cur.close()
@@ -82,11 +103,22 @@ def inputkurir():
         c = request.form['tgl_masuk']
         d = request.form['alamat']
         e = request.form['notel']
-        f = request.form['lama']
         g = request.form['id_tipe']
 
+        today = datetime.datetime.today()
+        someday = datetime.datetime.strptime(c, "%Y-%m-%d")
+        cal = today - someday
+        f = cal.days
+        print(a)
+        print(b)
+        print(c)
+        print(d)
+        print(e)
+        print(f)
+        print(g)
+
         cur = mysql.connection.commit()
-        cur.execute(f"insert into kurir ('{a}','{b}','{c}','{d}','{e}','{f}','{g}')")
+        cur.execute(f"insert into kurir values ('{a}','{b}','{c}','{d}','{e}','{f}','{g}')")
         cur.connection.commit()
         cur.close()
 
@@ -103,7 +135,7 @@ def inputkota():
         c = request.form['hargakota']
 
         cur = mysql.connection.commit()
-        cur.execute(f"insert into kota ('{a}','{b}','{c}')")
+        cur.execute(f"insert into kota values ('{a}','{b}','{c}')")
         cur.connection.commit()
         cur.close()
 
