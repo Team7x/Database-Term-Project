@@ -1,0 +1,21 @@
+
+<div class="content">
+    <h1 style="text-align: center">LIST KOTA</h1>
+    <table>
+        <tr>
+            <th>ID KOTA</th>
+            <th>NAMA KOTA</th>
+            <th>HARGA KOTA</th>
+        </tr>
+        {% for k in kota %}
+            <tr>
+                <td>{{ k[0] }}</td>
+                <td>{{ k[1] }}</td>
+                <td>{{ k[2] }}</td>
+                <form style="text-align: center"  method="post">
+                </form>
+            </tr>
+        {% endfor %}
+        <a href="/input/kota">INPUT KOTA</a>
+    </table>
+</div>
