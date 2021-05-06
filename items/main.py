@@ -21,7 +21,7 @@ def login():
         admin = cur.fetchall()
 
         for i in range(len(admin)):
-            if str(admin[i][3]) == str(password):
+            if str(admin[i][3]) == str(password) and str(admin[i][0] == str(userid)):
                 print(admin[i][3])
                 print(password)
                 loguser = user(admin[i][0],admin[i][1],admin[i][2])
@@ -34,11 +34,14 @@ def login():
 
 @app.route('/menu',methods=['GET','POST'])
 def menu():
-    if loguser.nim() == "":
-        return "blm login"
+    try:
+        if loguser.nim() == "":
+            return "blm login"
 
-    else:
-        return render_template('menu.html')
+        else:
+            return render_template('menu.html')
+    except:
+        return redirect('/')
 
 
 # INPUT 
@@ -126,16 +129,6 @@ def inputkurir():
         e = request.form['notel']
         g = request.form['id_tipe']
 
-        #today = datetime.datetime.today()
-        #someday = datetime.datetime.strptime(c, "%Y-%m-%d")
-        #cal = today - someday
-        #f = cal.days
-        print(a)
-        print(b)
-        print(c)
-        print(d)
-        print(e)
-        print(g)
 
         cur = mysql.connection.cursor()
         cur.execute(f"insert into kurir values ('{a}','{b}','{c}','{d}','{e}','{g}')")
@@ -210,6 +203,43 @@ def showorder():
 
         return render_template('/show/order.html',order2=order2)
 
+@app.route('/show/tipe',methods=['POST','GET'])
+def showtipe():
+
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('/show/tipe.html')
+    else:
+
+        cur = mysql.connection.cursor()
+        cur.execute(f'select * from tipe')
+        tipe= cur.fetchall()
+        cur.close()
+
+        return render_template('/show/tipe.html',tipe=tipe)
+    
+
+@app.route('/show/tipe/detail/<int:id>',methods=['POST','GET'])
+def showtipekurir(id):
+
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('/show/tipe.html')
+    else:
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"select * from kurir where id_tipe='{id}'")
+        tipe= cur.fetchall()
+        cur.close()
+
+        return render_template('/show/tipe/detail.html',tipe=tipe)
+
+    
+
 
 @app.route('/show/kurir',methods=['POST','GET'])
 def showkurir():
@@ -225,3 +255,4 @@ def showkurir():
         kurir = cur.fetchall()
         cur.close()
         return render_template('/show/kurir.html',kurir=kurir)
+

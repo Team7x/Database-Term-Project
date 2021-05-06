@@ -22,9 +22,6 @@
     <a>Berat Barang : </a>
     <input type="number" min="1" name="beratbarang" required/>
     <br>
-    <a>Tanggal : </a>
-    <input type="date" name="tgl" required/>
-    <br>
     <label for="nip">Kurir :</label>
     <select name="nip" id="nip" required>
         {% for t in range(0, detailKurir['idkurir'] | length) %}
