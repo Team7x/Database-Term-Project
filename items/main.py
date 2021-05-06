@@ -256,3 +256,48 @@ def showkurir():
         cur.close()
         return render_template('/show/kurir.html',kurir=kurir)
 
+@app.route('/delO/<int:id>')
+def delOrder(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f'DELETE FROM order2 WHERE resi={id}')
+        cur.connection.commit()
+        cur.close()
+        return redirect('/show/order')
+    except:
+        return "ada yang salah"
+
+
+@app.route('/delKota/<int:id>')
+def delKota(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f'DELETE FROM kota WHERE id_kota={id}')
+        cur.connection.commit()
+        cur.close()
+        return redirect('/show/kota')
+    except:
+        return "gagal apus"
+
+@app.route('/delKurir/<int:id>')
+def delKurir(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f'DELETE FROM kurir WHERE nip={id}')
+        cur.connection.commit()
+        cur.close()
+        return redirect('/show/kurir')
+    except:
+        return "gagl hapus"
+
+
+@app.route('/delTipe/<int:id>')
+def delTipe(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f'DELETE FROM tipe WHERE id_tipe={id}')
+        cur.connection.commit()
+        cur.close()
+        return redirect('/show/tipe')
+    except:
+        return "ada yang salah"

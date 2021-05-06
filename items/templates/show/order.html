@@ -16,12 +16,24 @@
             <th>ID KOTA</th>
             <th>ID STATUS</th>
             <th>ESTIMASI</th>
+            <th></th>
         </tr>
         {% for k in order2 %}
             <tr>
-                {% for i in k %}
-                <td>{{ i }}</td>
-                {% endfor %}
+                <td>{{ k[0] }}</td>
+                <td>{{ k[1] }}</td>
+                <td>{{ k[2] }}</td>
+                <td>{{ k[3] }}</td>
+                <td>{{ k[4] }}</td>
+                <td>{{ k[5] }}</td>
+                <td>{{ k[6] }}</td>
+                <td>{{ k[7] }}</td>
+                <td>{{ k[8] }}</td>
+                <td>{{ k[9] }}</td>
+                <td>{{ k[10] }}</td>
+                <td>{{ k[11] }}</td>
+                <td>{{ k[12] }}</td>
+                <td><a href=/delO/{{k[0]}}>hapus</a></td>
                 <form style="text-align: center"  method="post">
                 </form>
             </tr>
