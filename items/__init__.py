@@ -1,12 +1,9 @@
 from flask import Flask,render_template,request
-
 from flask_mysqldb import MySQL
-
-import os
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
-app.secret_key = os.urandom(24)
 
 app.config['MYSQL_HOST'] = 'sql6.freesqldatabase.com'
 app.config['MYSQL_USER'] = 'sql6410548'

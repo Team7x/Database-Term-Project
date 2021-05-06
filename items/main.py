@@ -3,10 +3,7 @@ from flask_mysqldb import MySQL
 from items import *
 from items.user import *
 import datetime
-
-import os
-
-app.secret_key = os.urandom(24)
+import matplotlib.pyplot as plt
 
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -341,3 +338,30 @@ def delTipe(id):
     except:
         return "ada yang salah"
 
+@app.route('/show/graphic/kota')
+def grapkota():
+    cur = mysql.connection.cursor()
+    cur.execute(f'select * from kota')
+    kota = cur.fetchall()
+    banyakOrder = []
+    for i in kota:
+        cur.execute(f'select count(resi) from order2 where id_kota={i[0]}')
+        temp = cur.fetchall()
+        banyakOrder.append(temp[0][0])
+
+    cur.execute('select namaKota from kota')
+    basing = cur.fetchall()
+    
+    graphkota=[]
+
+    for i in basing:
+        graphkota.append(i[0])
+
+    print(graphkota)
+    print(banyakOrder)
+    fig = plt.figure(figsize=(7,5))
+    plt.bar(graphkota,banyakOrder,width=0.5)
+
+    #plt.savefig('items/templates/show/graphic/kota.png')
+
+    return render_template('show/graphic/kota.html')
