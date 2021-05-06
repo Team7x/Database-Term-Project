@@ -21,11 +21,10 @@ def login():
         admin = cur.fetchall()
 
         for i in range(len(admin)):
-            if str(admin[i][3]) == str(password) and str(admin[i][0] == str(userid)):
-                print(admin[i][3])
-                print(password)
+            if (str(admin[i][0]) == str(userid)) and (str(admin[i][3]) == str(password)):
+
                 loguser = user(admin[i][0],admin[i][1],admin[i][2])
-                print(loguser)
+                print(loguser.__dict__)
                 return redirect(url_for('menu'))
         
 
