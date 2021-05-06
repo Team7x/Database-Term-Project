@@ -253,8 +253,17 @@ def showkurir():
         cur = mysql.connection.cursor()
         cur.execute(f'select * from kurir')
         kurir = cur.fetchall()
+        banyakOrder = []
+        for i in kurir:
+            cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+            temp = cur.fetchall()
+            banyakOrder.append(temp[0][0])
         cur.close()
-        return render_template('/show/kurir.html',kurir=kurir)
+        return render_template('/show/kurir.html',kurir=kurir, banyakOrder=banyakOrder)
+
+@app.route('/delO/<int:id>')
+def editKurir(id):
+    pass
 
 @app.route('/delO/<int:id>')
 def delOrder(id):
@@ -288,7 +297,7 @@ def delKurir(id):
         cur.close()
         return redirect('/show/kurir')
     except:
-        return "gagl hapus"
+        return "gagal hapus, kurir masi bawa barang"
 
 
 @app.route('/delTipe/<int:id>')
