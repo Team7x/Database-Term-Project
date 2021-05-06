@@ -1,0 +1,11 @@
+{% for i in kurirDetail %}
+    {% for j in range(0, i | length) %}
+        {% if j == 18 %}
+        <a>{{i[j]/2}}</a>
+        <br>
+        {% else %}
+        <a>{{i[j]}}</a>
+        <br>
+        {% endif %}
+    {% endfor %}
+{% endfor %}

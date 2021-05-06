@@ -282,9 +282,19 @@ def showkurir():
         cur.close()
         return render_template('/show/kurir.html',kurir=kurir, banyakOrder=banyakOrder)
 
-@app.route('/delO/<int:id>')
-def editKurir(id):
-    pass
+@app.route('/editOrder/<int:id>')
+def editOrder(id):
+    #try:
+    cur = mysql.connection.cursor()
+    cur.execute(f"""SELECT order2.*, namaKurir, no_telp_Kurir, namaKota, hargaKota,
+    namaTipe, hargaTipe
+    FROM order2 NATURAL JOIN kurir NATURAL JOIN tipe NATURAL JOIN kota where resi='{id}'
+    """)
+    kurirDetail = cur.fetchall()
+    cur.close()
+    return render_template('/edit/order.html', kurirDetail=kurirDetail)
+    #except:
+    return "ada yang salah"
 
 @app.route('/delO/<int:id>')
 def delOrder(id):
@@ -331,3 +341,4 @@ def delTipe(id):
         return redirect('/show/tipe')
     except:
         return "ada yang salah"
+
