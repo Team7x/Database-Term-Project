@@ -16,6 +16,7 @@
             <th>ID KOTA</th>
             <th>ID STATUS</th>
             <th>ESTIMASI</th>
+            <th></th>
         </tr>
         {% for k in order2 %}
             <tr>
@@ -32,6 +33,7 @@
                 <td>{{ k[10] }}</td>
                 <td>{{ k[11] }}</td>
                 <td>{{ k[12] }}</td>
+                <td><a href=/delO/{{k[0]}}>hapus</a></td>
                 <form style="text-align: center"  method="post">
                 </form>
             </tr>
@@ -39,3 +41,5 @@
         <a href="/input/order">INPUT ORDER</a>
     </table>
 </div>
+
+<a href="/show">balik</a>

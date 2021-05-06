@@ -1,17 +1,30 @@
 <h1>KURIR INPUT</h1>
 
 <form action="/input/kurir" method="POST">
+    <a>nip</a>
     <input type="text" name="nip" required/>
     <br>
+    <a>nama</a>
     <input type="text" name="nama" required/>
     <br>
+    <a>masuk</a>
     <input type="date" name="tgl_masuk" required/>
     <br>
+    <a>alamat</a>
     <input type="text" name="alamat" required/>
     <br>
+    <a>notel</a>
     <input type="number" name="notel" required/>
     <br>
-    <input type="number" name="id_tipe" required/>
+    <label for="id_tipe">tipe :</label>
+
+    <select name="id_tipe" id="id_tipe" required>
+        {% for t in dataTipe %}
+        <option value={{t[0]}}>{{t[1]}}</option>
+        {% endfor %}
+    </select>
     <br>
     <input type="submit"/>
 </form>
+
+<a href="/show/kurir">balik</a>
