@@ -183,9 +183,13 @@ def showkota():
         cur = mysql.connection.cursor()
         cur.execute(f'select * from kota')
         kota = cur.fetchall()
+        banyakOrder = []
+        for i in kota:
+            cur.execute(f'select count(resi) from order2 where id_kota={i[0]}')
+            temp = cur.fetchall()
+            banyakOrder.append(temp[0][0])
         cur.close()
-
-        return render_template('/show/kota.html', kota=kota)
+        return render_template('/show/kota.html',kota=kota, banyakOrder=banyakOrder)
 
 @app.route('/show/order',methods=['POST','GET'])
 def showorder():
@@ -214,11 +218,25 @@ def showtipe():
     else:
 
         cur = mysql.connection.cursor()
+        cur.execute(f'select * from kurir')
+        kurir = cur.fetchall()
+        banyakOrder = []
+        for i in kurir:
+            cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+            temp = cur.fetchall()
+            banyakOrder.append(temp[0][0])
+        banyakOrder2 = []
         cur.execute(f'select * from tipe')
         tipe= cur.fetchall()
+        for i in tipe:
+            banyaktemp = 0
+            for j in range(0, len(kurir)):
+                if(i[0]==kurir[j][5]):
+                    banyaktemp += banyakOrder[j]
+            banyakOrder2.append(banyaktemp)
         cur.close()
 
-        return render_template('/show/tipe.html',tipe=tipe)
+        return render_template('/show/tipe.html',tipe=tipe, banyakOrder=banyakOrder2)
     
 
 @app.route('/show/tipe/detail/<int:id>',methods=['POST','GET'])
@@ -233,12 +251,15 @@ def showtipekurir(id):
 
         cur = mysql.connection.cursor()
         cur.execute(f"select * from kurir where id_tipe='{id}'")
-        tipe= cur.fetchall()
+        kurir= cur.fetchall()
+        banyakOrder = []
+        for i in kurir:
+            cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+            temp = cur.fetchall()
+            banyakOrder.append(temp[0][0])
         cur.close()
 
-        return render_template('/show/tipe/detail.html',tipe=tipe)
-
-    
+        return render_template('/show/tipe/detail.html',kurir=kurir, banyakOrder=banyakOrder)    
 
 
 @app.route('/show/kurir',methods=['POST','GET'])

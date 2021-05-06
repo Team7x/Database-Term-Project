@@ -25,7 +25,7 @@
     <label for="nip">Kurir :</label>
     <select name="nip" id="nip" required>
         {% for t in range(0, detailKurir['idkurir'] | length) %}
-        <option value={{t+1}}>{{detailKurir['tipe'][t]}} - {{detailKurir['nama'][t]}}</option>
+        <option value={{ detailKurir['idkurir'][t] }}>{{detailKurir['tipe'][t]}} - {{detailKurir['nama'][t]}}</option>
         {% endfor %}
     </select>
     <br>

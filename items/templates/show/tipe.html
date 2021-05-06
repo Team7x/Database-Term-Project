@@ -7,16 +7,18 @@
             <th>NAMA TIPE</th>
             <th>HARGA TIPE</th>
             <th>LAMA PENGIRIMAN</th>
+            <th>BANYAK</th>
             <th>DETAILS</th>
         </tr>
-        {% for k in tipe %}
+        {% for k in range (0, tipe | length) %}
             <tr>
-                <td>{{ k[0] }}</td>
-                <td>{{ k[1] }}</td>
-                <td>{{ k[2] }}</td>
-                <td>{{ k[3] }} hari</td>
+                <td>{{ tipe[k][0] }}</td>
+                <td>{{ tipe[k][1] }}</td>
+                <td>{{ tipe[k][2] }}</td>
+                <td>{{ tipe[k][3] }} hari</td>
+                <td>{{ banyakOrder[k] }}</td>
                 <td>
-                    <a href="/show/tipe/detail/{{ k[0] }}">SHOW</a>
+                    <a href="/show/tipe/detail/{{ tipe[k][0] }}">SHOW</a>
                 </td>
                 <form style="text-align: center"  method="post">
                 </form>

@@ -9,15 +9,19 @@
             <th>ALAMAT KURIR</th>
             <th>NO TELP KURIR</th>
             <th>ID TIPE</th>
+            <th>BANYAK ORDER</th>
+            <th></th>
         </tr>
-        {% for k in tipe %}
+        {% for k in range(0, kurir | length) %}
             <tr>
-                <td>{{ k[0] }}</td>
-                <td>{{ k[1] }}</td>
-                <td>{{ k[2] }}</td>
-                <td>{{ k[3] }}</td>
-                <td>{{ k[4] }}</td>
-                <td>{{ k[5] }}</td>
+                <td>{{ kurir[k][0] }}</td>
+                <td>{{ kurir[k][1] }}</td>
+                <td>{{ kurir[k][2] }}</td>
+                <td>{{ kurir[k][3] }}</td>
+                <td>{{ kurir[k][4] }}</td>
+                <td>{{ kurir[k][5] }}</td>
+                <td> &nbsp &nbsp &nbsp {{ banyakOrder[k] }}</td>
+                <td><a href=/delKurir/{{kurir[k][0]}}>hapus</a></td>
                 <form style="text-align: center"  method="post">
                 </form>
             </tr>
@@ -25,3 +29,4 @@
         <a href="/input/kurir">INPUT KURIR</a>
     </table>
 </div>
+<a href="/show/tipe">balik</a>
