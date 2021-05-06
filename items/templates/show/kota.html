@@ -6,12 +6,14 @@
             <th>ID KOTA</th>
             <th>NAMA KOTA</th>
             <th>HARGA KOTA</th>
+            <th></th>
         </tr>
         {% for k in kota %}
             <tr>
                 <td>{{ k[0] }}</td>
                 <td>{{ k[1] }}</td>
                 <td>{{ k[2] }}</td>
+                <td><a href=/delKota/{{k[0]}}>hapus</a></td>
                 <form style="text-align: center"  method="post">
                 </form>
             </tr>
