@@ -5,6 +5,7 @@ from items.user import *
 import datetime
 import matplotlib.pyplot as plt
 
+
 @app.route('/',methods=['GET','POST'])
 def login():
     global loguser
@@ -338,6 +339,17 @@ def delTipe(id):
     except:
         return "ada yang salah"
 
+@app.route('/show/graphic',methods=['POST','GET'])
+def showgraph():
+    
+    if request.method == "POST":
+        if loguser.nim() == "":
+            return "login duls"
+        else:
+            return render_template('show/graphic.html')
+    else:
+        return render_template('show/graphic.html')
+
 @app.route('/show/graphic/kota')
 def grapkota():
     cur = mysql.connection.cursor()
@@ -362,6 +374,75 @@ def grapkota():
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphkota,banyakOrder,width=0.5)
 
-    #plt.savefig('items/templates/show/graphic/kota.png')
+    plt.savefig('items/static/kotapic.png')
+    image_file = url_for('static', filename='kotapic.png')
+    return render_template('show/graphic/kota.html', graphkota_pic=image_file)
 
-    return render_template('show/graphic/kota.html')
+@app.route('/show/graphic/kurir')
+def grapkurir():
+
+    cur = mysql.connection.cursor()
+    cur.execute(f'select * from kurir')
+    kurir = cur.fetchall()
+    banyakOrder = []
+    for i in kurir:
+        cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+        temp = cur.fetchall()
+        banyakOrder.append(temp[0][0])
+
+    cur.execute('select namaKurir from kurir')
+    basing = cur.fetchall()
+    
+    graphkurir=[]
+
+    for i in basing:
+        graphkurir.append(i[0])
+
+    print(graphkurir)
+    print(banyakOrder)
+    fig = plt.figure(figsize=(7,5))
+    plt.bar(graphkurir,banyakOrder,width=0.5)
+
+    plt.savefig('items/static/kurirpic.png')
+    image_file = url_for('static', filename='kurirpic.png')
+    
+    return render_template('show/graphic/kurir.html', graphkurir_pic=image_file)
+
+
+@app.route('/show/graphic/tipe')
+def graptipe():
+    cur = mysql.connection.cursor()
+    cur.execute(f'select * from kurir')
+    kurir = cur.fetchall()
+    banyakOrder = []
+    for i in kurir:
+        cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+        temp = cur.fetchall()
+        banyakOrder.append(temp[0][0])
+    banyakOrder2 = []
+    cur.execute(f'select * from tipe')
+    tipe= cur.fetchall()
+    for i in tipe:
+        banyaktemp = 0
+        for j in range(0, len(kurir)):
+            if(i[0]==kurir[j][5]):
+                banyaktemp += banyakOrder[j]
+        banyakOrder2.append(banyaktemp)
+
+    cur.execute('select namaTipe from tipe')
+    basing = cur.fetchall()
+    
+    graphtipe=[]
+
+    for i in basing:
+        graphtipe.append(i[0])
+
+    print(graphtipe)
+    print(banyakOrder2)
+
+    fig = plt.figure(figsize=(7,5))
+    plt.bar(graphtipe,banyakOrder2,width=0.5)
+
+    plt.savefig('items/static/tipepic.png')
+    image_file = url_for('static', filename='tipepic.png')
+    return render_template('show/graphic/tipe.html', graphtipe_pic=image_file)
