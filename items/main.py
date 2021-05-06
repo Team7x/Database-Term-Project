@@ -45,6 +45,24 @@ def menu():
 
 @app.route('/input/order',methods=['GET','POST'])
 def inputorder():
+    cur = mysql.connection.cursor()
+    cur.execute(f"select * from kota")
+    dataKota = cur.fetchall()
+    cur.execute(f"select * from kurir")
+    dataKurir = cur.fetchall()
+    detailKurir = {
+        "idkurir" : [],
+        "nama" : [],
+        "tipe" : []
+    }
+    for i in dataKurir:
+        cur = mysql.connection.cursor()
+        cur.execute(f"select namaTipe from tipe where id_tipe={i[5]}")
+        temp = cur.fetchall()
+        detailKurir["tipe"].append(temp[0][0])
+        detailKurir["idkurir"].append(i[0])
+        detailKurir["nama"].append(i[1])
+        cur.close()
     
     if request.method == 'POST':
         a = request.form['resi']
@@ -90,13 +108,16 @@ def inputorder():
 
         cur.close()
 
-        return "loh loh loh"
+        return redirect('/show/order')
         
-    return render_template('/input/order.html')
+    return render_template('/input/order.html', dataKota=dataKota, dataKurir=dataKurir, detailKurir=detailKurir)
 
 @app.route('/input/kurir',methods=['GET', 'POST'])
 def inputkurir():
-
+    cur = mysql.connection.cursor()
+    cur.execute(f"select * from tipe")
+    dataTipe = cur.fetchall()
+    cur.close()
     if request.method == "POST":
         a = request.form['nip']
         b = request.form['nama']
@@ -105,26 +126,25 @@ def inputkurir():
         e = request.form['notel']
         g = request.form['id_tipe']
 
-        today = datetime.datetime.today()
-        someday = datetime.datetime.strptime(c, "%Y-%m-%d")
-        cal = today - someday
-        f = cal.days
+        #today = datetime.datetime.today()
+        #someday = datetime.datetime.strptime(c, "%Y-%m-%d")
+        #cal = today - someday
+        #f = cal.days
         print(a)
         print(b)
         print(c)
         print(d)
         print(e)
-        print(f)
         print(g)
 
-        cur = mysql.connection.commit()
-        cur.execute(f"insert into kurir values ('{a}','{b}','{c}','{d}','{e}','{f}','{g}')")
+        cur = mysql.connection.cursor()
+        cur.execute(f"insert into kurir values ('{a}','{b}','{c}','{d}','{e}','{g}')")
         cur.connection.commit()
         cur.close()
 
-        return "BERHASIL MENAMBAH KURIR!"
+        return redirect('/show/kurir')
     
-    return render_template('/input/kurir.html')
+    return render_template('/input/kurir.html', dataTipe=dataTipe)
 
 @app.route('/input/kota',methods=['GET','POST'])
 def inputkota():
@@ -134,10 +154,12 @@ def inputkota():
         b = request.form['namakota']
         c = request.form['hargakota']
 
-        cur = mysql.connection.commit()
+        cur = mysql.connection.cursor()
         cur.execute(f"insert into kota values ('{a}','{b}','{c}')")
         cur.connection.commit()
         cur.close()
+
+        return redirect('/show/kota')
 
     return render_template('/input/kota.html')
 
