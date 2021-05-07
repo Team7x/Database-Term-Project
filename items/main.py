@@ -5,6 +5,8 @@ from items.user import *
 import datetime
 import matplotlib.pyplot as plt
 
+global urut
+urut=1
 
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -352,6 +354,9 @@ def showgraph():
 
 @app.route('/show/graphic/kota')
 def grapkota():
+    global urut
+    urut= urut+1
+    
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kota')
     kota = cur.fetchall()
@@ -374,12 +379,17 @@ def grapkota():
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphkota,banyakOrder,width=0.5)
 
-    plt.savefig('items/static/kotapic.png')
-    image_file = url_for('static', filename='kotapic.png')
+    namafile='kotapic'+str(urut)+'.png'
+    tempat='items/static/'+namafile
+    plt.savefig(tempat)
+    image_file = url_for('static', filename=namafile)
+
     return render_template('show/graphic/kota.html', graphkota_pic=image_file)
 
 @app.route('/show/graphic/kurir')
 def grapkurir():
+    global urut
+    urut= urut+1
 
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kurir')
@@ -403,14 +413,19 @@ def grapkurir():
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphkurir,banyakOrder,width=0.5)
 
-    plt.savefig('items/static/kurirpic.png')
-    image_file = url_for('static', filename='kurirpic.png')
+    namafile='kurirpic'+str(urut)+'.png'
+    tempat='items/static/'+namafile
+    plt.savefig(tempat)
+    image_file = url_for('static', filename=namafile)
     
     return render_template('show/graphic/kurir.html', graphkurir_pic=image_file)
 
 
 @app.route('/show/graphic/tipe')
 def graptipe():
+    global urut
+    urut= urut+1
+
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kurir')
     kurir = cur.fetchall()
@@ -443,6 +458,9 @@ def graptipe():
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphtipe,banyakOrder2,width=0.5)
 
-    plt.savefig('items/static/tipepic.png')
-    image_file = url_for('static', filename='tipepic.png')
+    namafile='tipepic'+str(urut)+'.png'
+    tempat='items/static/'+namafile
+    plt.savefig(tempat)
+    image_file = url_for('static', filename=namafile)
+
     return render_template('show/graphic/tipe.html', graphtipe_pic=image_file)
