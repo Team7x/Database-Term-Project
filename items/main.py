@@ -295,6 +295,22 @@ def editOrder(id):
     #except:
     return "ada yang salah"
 
+@app.route('/editKurir/<int:id>')
+def editKurir(id):
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute(f'select * from kurir where nip={id}')
+        kurir = cur.fetchall()
+        banyakOrder = []
+        for i in kurir:
+            cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+            temp = cur.fetchall()
+            banyakOrder.append(temp[0][0])
+        cur.close()
+        return render_template('/show/kurir.html',kurir=kurir, banyakOrder=banyakOrder)
+    except:
+        return "ada yang error"
+
 @app.route('/delO/<int:id>')
 def delOrder(id):
     try:

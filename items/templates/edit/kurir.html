@@ -1,0 +1,34 @@
+
+<div class="content">
+    <h1 style="text-align: center">LIST KURIR</h1>
+    <table>
+        <tr>
+            <th>NIP</th>
+            <th>NAMA KURIR</th>
+            <th>TGL MASUK</th>
+            <th>ALAMAT KURIR</th>
+            <th>NO TELP KURIR</th>
+            <th>ID TIPE</th>
+            <th>BANYAK ORDER</th>
+            <th></th>
+        </tr>
+        {% for k in range(0, kurir | length) %}
+            <tr>
+                <td>{{ kurir[k][0] }}</td>
+                <td>{{ kurir[k][1] }}</td>
+                <td>{{ kurir[k][2] }}</td>
+                <td>{{ kurir[k][3] }}</td>
+                <td>{{ kurir[k][4] }}</td>
+                <td>{{ kurir[k][5] }}</td>
+                <td> &nbsp &nbsp &nbsp {{ banyakOrder[k] }}</td>
+                <td><a href=/delKurir/{{kurir[k][0]}}>hapus</a></td>
+                <td><a href=/editKurir/{{kurir[k][0]}}>edit</a></td>
+                <form style="text-align: center"  method="post">
+                </form>
+            </tr>
+        {% endfor %}
+        <a href="/input/kurir">INPUT KURIR</a>
+    </table>
+</div>
+
+<a href="/show">balik</a>

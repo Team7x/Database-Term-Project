@@ -1,0 +1,27 @@
+
+<div class="content">
+    <h1 style="text-align: center">LIST KOTA</h1>
+    <table>
+        <tr>
+            <th>ID KOTA</th>
+            <th>NAMA KOTA</th>
+            <th>HARGA KOTA</th>
+            <th>BANYAK ORDER</th>
+            <th></th>
+        </tr>
+        {% for k in range(0, kota | length) %}
+            <tr>
+                <td>{{ kota[k][0] }}</td>
+                <td>{{ kota[k][1] }}</td>
+                <td>{{ kota[k][2] }}</td>
+                <td>{{ banyakOrder[k] }}</td>
+                <td><a href=/delKota/{{kota[k][0]}}>hapus</a></td>
+                <form style="text-align: center"  method="post">
+                </form>
+            </tr>
+        {% endfor %}
+        <a href="/input/kota">INPUT KOTA</a>
+    </table>
+</div>
+
+<a href="/show">balik</a>
