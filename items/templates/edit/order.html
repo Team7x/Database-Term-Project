@@ -1,11 +1,46 @@
-{% for i in kurirDetail %}
-    {% for j in range(0, i | length) %}
-        {% if j == 18 %}
-        <a>{{i[j]/2}}</a>
-        <br>
+ 
+<div class="content">
+    <h1 style="text-align: center">detail order</h1>
+    <table>
+    {% for j in range(0, orderDetail | length) %}
+        <tr>
+        {% if j == 17 %}
+        <th>
+        {{judul[j]}}
+        </th>
+        <th>
+        {{orderDetail[j]/2}}
+        </th>
         {% else %}
-        <a>{{i[j]}}</a>
-        <br>
+        <th>
+        {{judul[j]}}
+        </th>
+        <th>
+        {{orderDetail[j]}}
+        </th>
         {% endif %}
+        </tr>
     {% endfor %}
-{% endfor %}
+    </table>
+</div>
+
+<div class="form">
+    <form action="/editOrder/{{id}}" method="POST">
+        <br>
+        <br>
+        <a>EDIT DATA</a>
+        <br>
+        <label>Nama penerima baru: </label>
+        <input type="text" name="namabaru">
+        <br>
+        <label>No. telp penerima baru: </label>
+        <input type="text" name="nobaru">
+        <br>
+        <label>Alamat penerima baru (kota yang sama): </label>
+        <input type="text" name="addrbaru">
+        <br>
+        <input type="submit" value="ganti data">
+    </form>
+</div>
+
+<a href="/show/order">balik</a>

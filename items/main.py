@@ -5,8 +5,12 @@ from items.user import *
 import datetime
 import matplotlib.pyplot as plt
 
-global urut
-urut=1
+global urutO
+global urutKo
+global urutKu
+urutO = 0
+urutKo = 0
+urutKu = 0
 
 @app.route('/',methods=['GET','POST'])
 def login():
@@ -24,7 +28,6 @@ def login():
             if (str(admin[i][0]) == str(userid)) and (str(admin[i][3]) == str(password)):
 
                 loguser = user(admin[i][0],admin[i][1],admin[i][2])
-                print(loguser.__dict__)
                 return redirect(url_for('menu'))
         
 
@@ -98,7 +101,6 @@ def inputorder():
 
         x = datetime.datetime.now()
         tgl = (f'{x.year}-{x.month}-{int(x.day)+lama}')
-        print(tgl)
 
         cur.close()
         cur = mysql.connection.cursor()
@@ -261,7 +263,7 @@ def showtipekurir(id):
         return render_template('/show/tipe/detail.html',kurir=kurir, banyakOrder=banyakOrder)    
 
 
-@app.route('/show/kurir',methods=['POST','GET'])
+@app.route('/show/kurir', methods=['POST','GET'])
 def showkurir():
     
     if request.method == "POST":
@@ -281,41 +283,110 @@ def showkurir():
         cur.close()
         return render_template('/show/kurir.html',kurir=kurir, banyakOrder=banyakOrder)
 
-@app.route('/editOrder/<int:id>')
+@app.route('/editOrder/<int:id>', methods=['POST','GET'])
 def editOrder(id):
-    #try:
-    cur = mysql.connection.cursor()
-    cur.execute(f"""SELECT order2.*, namaKurir, no_telp_Kurir, namaKota, hargaKota,
-    namaTipe, hargaTipe
-    FROM order2 NATURAL JOIN kurir NATURAL JOIN tipe NATURAL JOIN kota where resi='{id}'
-    """)
-    kurirDetail = cur.fetchall()
-    cur.close()
-    return render_template('/edit/order.html', kurirDetail=kurirDetail)
-    #except:
-    return "ada yang salah"
-
-@app.route('/editKurir/<int:id>')
-def editKurir(id):
-    try:
+    if request.method == 'POST':
+        namabaru = request.form['namabaru']
+        nobaru = request.form['nobaru']
+        addrbaru = request.form['addrbaru']
         cur = mysql.connection.cursor()
-        cur.execute(f'select * from kurir where nip={id}')
-        kurir = cur.fetchall()
-        banyakOrder = []
-        for i in kurir:
-            cur.execute(f'select count(resi) from order2 where nip={i[0]}')
-            temp = cur.fetchall()
-            banyakOrder.append(temp[0][0])
+        if(namabaru != ''):
+            cur.execute(f"update order2 set namaPenerima = '{namabaru}' where resi = '{id}'")
+            cur.connection.commit()
+        if(nobaru != ''):
+            cur.execute(f"update order2 set no_telp_penerima = '{str(nobaru)}' where resi = '{id}'")
+            cur.connection.commit()
+        if(addrbaru != ''):
+            cur.execute(f"update order2 set alamat_penerima = '{str(addrbaru)}' where resi = '{id}'")
+            cur.connection.commit()
         cur.close()
-        return render_template('/show/kurir.html',kurir=kurir, banyakOrder=banyakOrder)
-    except:
-        return "ada yang error"
+        repres = '/editOrder/' + str(id)
+        return redirect(repres)
+        
+    else:
+        #try:
+        cur = mysql.connection.cursor()
+        cur.execute(f"""SELECT order2.*, namaKurir, no_telp_Kurir, hargaKota,
+        namaTipe, hargaTipe
+        FROM order2 NATURAL JOIN kurir NATURAL JOIN tipe NATURAL JOIN kota where resi='{id}'
+        """)
+        orderDetail = cur.fetchall()
+        orderDetail = orderDetail[0]
+        cur.close()
+        judul = ['RESI', 'Nama Pengirim', 'Nama Penerima', 'No Telp Pengirim', 'No Telp Penerima', 'Kota Tujuan', 'Berat Barang',\
+        'Tanggal pengiriman', 'Harga Bayar Total', 'NIP Kurir', 'ID Tipe', 'Status', 'Estimasi Sampai', 'Nama Kurir',\
+        'No Telp Kurir', 'Harga Kota (/kg)', 'Tipe Pengiriman', 'Harga Tipe']
+        return render_template('/edit/order.html', orderDetail=orderDetail, id=id, judul=judul)
+        #except:
+        #return "ada yang salah"
 
-@app.route('/delO/<int:id>')
+@app.route('/editKurir/<int:id>', methods=['POST','GET'])
+def editKurir(id):
+    if request.method == 'POST':
+        nobaru = request.form['nobaru']
+        addrbaru = request.form['addrbaru']
+        cur = mysql.connection.cursor()
+        if(nobaru != ''):
+            cur.execute(f"update kurir set no_telp_Kurir = '{str(nobaru)}' where nip = '{id}'")
+            cur.connection.commit()
+        if(addrbaru != ''):
+            cur.execute(f"update kurir set alamatKurir = '{str(addrbaru)}' where nip = '{id}'")
+            cur.connection.commit()
+        cur.close()
+        repres = '/editKurir/' + str(id)
+        return redirect(repres)
+
+    else:
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f'select * from kurir natural join tipe where nip={id}')
+            kurir = cur.fetchall()
+            for i in kurir:
+                cur.execute(f'select count(resi) from order2 where nip={i[0]}')
+                temp = cur.fetchall()
+                banyakOrder = temp[0][0]
+            cur.close()
+            kurir = kurir[0]
+            judul = ['NIP', 'ID Tipe', 'Nama Kurir', 'Tanggal Masuk', 'Alamat Kurir', 'No Telp',\
+            'Tipe Pengiriman', 'Harga Tipe', 'Estimasi Lama Pengiriman', 'Banyak Order']
+            return render_template('/edit/kurir.html',kurir=kurir, banyakOrder=banyakOrder, id=id, judul=judul)
+        except:
+            return "ada yang error"
+
+@app.route('/editKota/<int:id>', methods=['POST','GET'])
+def editKota(id):
+    
+    if request.method == 'POST':
+        hargabaru = request.form['hargabaru']
+        cur = mysql.connection.cursor()
+        if(hargabaru != ''):
+            cur.execute(f"update kota set hargaKota = '{str(hargabaru)}' where id_kota = '{id}'")
+            cur.connection.commit()
+        cur.close()
+        repres = '/editKota/' + str(id)
+        return redirect(repres)
+
+    else:
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f'select * from kota where id_kota={id}')
+            kota = cur.fetchall()
+            for i in kota:
+                cur.execute(f'select count(resi) from order2 where id_kota={i[0]}')
+                temp = cur.fetchall()
+                banyakOrder = temp[0][0]
+            cur.close()
+            kota = kota[0]
+            judul = ['ID Kota', 'Nama Kota', 'Harga Kota']
+            return render_template('/edit/kota.html',kota=kota, banyakOrder=banyakOrder, id=id, judul=judul)
+        except:
+            return "ada yang salah"
+
+@app.route('/delO/<string:id>')
 def delOrder(id):
     try:
         cur = mysql.connection.cursor()
-        cur.execute(f'DELETE FROM order2 WHERE resi={id}')
+        cur.execute(f"DELETE FROM order2 WHERE resi='{id}'")
         cur.connection.commit()
         cur.close()
         return redirect('/show/order')
@@ -370,8 +441,8 @@ def showgraph():
 
 @app.route('/show/graphic/kota')
 def grapkota():
-    global urut
-    urut= urut+1
+    global urutKo
+    urutKo= urutKo+1
     
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kota')
@@ -390,22 +461,21 @@ def grapkota():
     for i in basing:
         graphkota.append(i[0])
 
-    print(graphkota)
-    print(banyakOrder)
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphkota,banyakOrder,width=0.5)
 
-    namafile='kotapic'+str(urut)+'.png'
+    namafile='kotapic'+str(urutKo)+'.png'
     tempat='items/static/'+namafile
     plt.savefig(tempat)
     image_file = url_for('static', filename=namafile)
-
+    plt.switch_backend('agg')
+    
     return render_template('show/graphic/kota.html', graphkota_pic=image_file)
 
 @app.route('/show/graphic/kurir')
 def grapkurir():
-    global urut
-    urut= urut+1
+    global urutKu
+    urutKu= urutKu+1
 
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kurir')
@@ -424,23 +494,22 @@ def grapkurir():
     for i in basing:
         graphkurir.append(i[0])
 
-    print(graphkurir)
-    print(banyakOrder)
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphkurir,banyakOrder,width=0.5)
 
-    namafile='kurirpic'+str(urut)+'.png'
+    namafile='kurirpic'+str(urutKu)+'.png'
     tempat='items/static/'+namafile
     plt.savefig(tempat)
     image_file = url_for('static', filename=namafile)
+    plt.switch_backend('agg')
     
     return render_template('show/graphic/kurir.html', graphkurir_pic=image_file)
 
 
 @app.route('/show/graphic/tipe')
 def graptipe():
-    global urut
-    urut= urut+1
+    global urutO
+    urutO= urutO+1
 
     cur = mysql.connection.cursor()
     cur.execute(f'select * from kurir')
@@ -468,15 +537,13 @@ def graptipe():
     for i in basing:
         graphtipe.append(i[0])
 
-    print(graphtipe)
-    print(banyakOrder2)
-
     fig = plt.figure(figsize=(7,5))
     plt.bar(graphtipe,banyakOrder2,width=0.5)
 
-    namafile='tipepic'+str(urut)+'.png'
+    namafile='tipepic'+str(urutO)+'.png'
     tempat='items/static/'+namafile
     plt.savefig(tempat)
     image_file = url_for('static', filename=namafile)
-
+    plt.switch_backend('agg')
+    
     return render_template('show/graphic/tipe.html', graphtipe_pic=image_file)

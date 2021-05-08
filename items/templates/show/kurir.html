@@ -19,10 +19,12 @@
                 <td>{{ kurir[k][2] }}</td>
                 <td>{{ kurir[k][3] }}</td>
                 <td>{{ kurir[k][4] }}</td>
-                <td>{{ kurir[k][5] }}</td>
+                <td><a href=/show/tipe>{{ kurir[k][5] }}</a></td>
                 <td> &nbsp &nbsp &nbsp {{ banyakOrder[k] }}</td>
-                <td><a href=/delKurir/{{kurir[k][0]}}>hapus</a></td>
-                <td><a href=/editKurir/{{kurir[k][0]}}>edit</a></td>
+                <td>
+                <a href=/editKurir/{{kurir[k][0]}}>edit</a><br>
+                <a href=/delKurir/{{kurir[k][0]}}>hapus</a>
+                </td>
                 <form style="text-align: center"  method="post">
                 </form>
             </tr>
