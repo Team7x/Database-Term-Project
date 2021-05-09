@@ -452,7 +452,7 @@ def editKota(id):
     except:
         return redirect('/')
 
-@app.route('/delO/<string:id>')
+@app.route('/delO/<int:id>')
 def delOrder(id):
     try:
         if loguser.nim() == "":
