@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 global urutO
 global urutKo
 global urutKu
+global loguser
 urutO = 0
 urutKo = 0
 urutKu = 0
@@ -666,5 +667,15 @@ def graptipe():
             
             return render_template('show/graphic/tipe.html', graphtipe_pic=image_file)
             
+    except:
+        return redirect('/')
+
+
+@app.route('/logoutbye')
+def logoutbye():
+    global loguser
+    try:
+        del loguser
+        return redirect('/')
     except:
         return redirect('/')
