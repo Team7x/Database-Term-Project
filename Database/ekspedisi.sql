@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.7.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 06:33 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Host: sql6.freesqldatabase.com
+-- Generation Time: May 09, 2021 at 11:56 AM
+-- Server version: 5.5.62-0ubuntu0.14.04.1
+-- PHP Version: 7.0.33-0ubuntu0.16.04.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ekspedisi`
+-- Database: `sql6410548`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +40,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`nim`, `name`, `alamat`, `password`) VALUES
-('119140110', 'Aulia Rahman Zulfi', 'Jakarta', '2001-02-09');
+('1', '1', '1', '1'),
+('119140110', 'Aulia Rahman Zulfi', 'Jakarta', '2001-02-09'),
+('119140190', 'Sayyid Muhammad Umar Al Haris', 'Jalan Demang Lebar Daun Palembang', '2001-10-12');
 
 -- --------------------------------------------------------
 
@@ -48,26 +51,10 @@ INSERT INTO `admin` (`nim`, `name`, `alamat`, `password`) VALUES
 --
 
 CREATE TABLE `kota` (
-  `id_kota` varchar(10) NOT NULL,
+  `id_kota` int(10) NOT NULL,
   `namaKota` varchar(50) NOT NULL,
   `hargaKota` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kota`
---
-
-INSERT INTO `kota` (`id_kota`, `namaKota`, `hargaKota`) VALUES
-('1', 'Jakarta', 15000),
-('10', 'Makasar', 25000),
-('2', 'Lampung', 17000),
-('3', 'Palembang', 16000),
-('4', 'Jambi', 18000),
-('5', 'Banten', 16000),
-('6', 'Bandung', 17000),
-('7', 'Padang', 18000),
-('8', 'Sorong', 30000),
-('9', 'Bali', 20000);
 
 -- --------------------------------------------------------
 
@@ -76,21 +63,13 @@ INSERT INTO `kota` (`id_kota`, `namaKota`, `hargaKota`) VALUES
 --
 
 CREATE TABLE `kurir` (
-  `nip` varchar(10) NOT NULL,
+  `nip` int(10) NOT NULL,
   `namaKurir` varchar(50) NOT NULL,
   `tgl_masuk` date NOT NULL,
   `alamatKurir` varchar(50) NOT NULL,
   `no_telp_Kurir` varchar(50) NOT NULL,
-  `lamaKerja` date NOT NULL,
-  `id_tipe` varchar(10) NOT NULL
+  `id_tipe` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kurir`
---
-
-INSERT INTO `kurir` (`nip`, `namaKurir`, `tgl_masuk`, `alamatKurir`, `no_telp_Kurir`, `lamaKerja`, `id_tipe`) VALUES
-('1', 'Bambang', '2015-09-01', 'Depok', '081234563532', '2019-10-06', '1');
 
 -- --------------------------------------------------------
 
@@ -99,7 +78,7 @@ INSERT INTO `kurir` (`nip`, `namaKurir`, `tgl_masuk`, `alamatKurir`, `no_telp_Ku
 --
 
 CREATE TABLE `order2` (
-  `resi` varchar(20) NOT NULL,
+  `resi` int(20) NOT NULL,
   `namaPengirim` varchar(50) NOT NULL,
   `namaPenerima` varchar(50) NOT NULL,
   `no_telp_pengirim` varchar(50) NOT NULL,
@@ -108,18 +87,11 @@ CREATE TABLE `order2` (
   `beratBarang` int(10) NOT NULL,
   `tgl_pengiriman` date NOT NULL,
   `hargaTotal` int(10) NOT NULL,
-  `nip` varchar(10) NOT NULL,
-  `id_kota` varchar(10) NOT NULL,
-  `id_status` varchar(10) NOT NULL,
+  `nip` int(10) NOT NULL,
+  `id_kota` int(10) NOT NULL,
+  `id_status` int(10) NOT NULL,
   `estimasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `order2`
---
-
-INSERT INTO `order2` (`resi`, `namaPengirim`, `namaPenerima`, `no_telp_pengirim`, `no_telp_penerima`, `alamat_penerima`, `beratBarang`, `tgl_pengiriman`, `hargaTotal`, `nip`, `id_kota`, `id_status`, `estimasi`) VALUES
-('143425243', 'Supriyadi', 'Paijo', '083424523243', '084324234141', 'Jakarta', 15, '2021-05-05', 15000, '1', '1', '0', '2021-05-06');
 
 -- --------------------------------------------------------
 
@@ -128,7 +100,7 @@ INSERT INTO `order2` (`resi`, `namaPengirim`, `namaPenerima`, `no_telp_pengirim`
 --
 
 CREATE TABLE `status` (
-  `id_status` varchar(10) NOT NULL,
+  `id_status` int(10) NOT NULL,
   `namaStatus` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -147,7 +119,7 @@ INSERT INTO `status` (`id_status`, `namaStatus`) VALUES
 --
 
 CREATE TABLE `tipe` (
-  `id_tipe` varchar(10) NOT NULL,
+  `id_tipe` int(10) NOT NULL,
   `namaTipe` varchar(50) NOT NULL,
   `hargaTipe` int(5) NOT NULL,
   `lama` int(10) NOT NULL
@@ -158,9 +130,9 @@ CREATE TABLE `tipe` (
 --
 
 INSERT INTO `tipe` (`id_tipe`, `namaTipe`, `hargaTipe`, `lama`) VALUES
-('1', 'REG', 9000, 3),
-('2', 'FLASH', 17000, 1),
-('3', 'INSTANT', 45000, 0);
+('1', 'REG', 2, 5),
+('2', 'FLASH', 3, 3),
+('3', 'INSTANT', 4, 1);
 
 --
 -- Indexes for dumped tables
