@@ -1,3 +1,69 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+      <title>Login landing page</title>
+      {% block head %}{% endblock %}
+  </head>
+  <body>
+      <section class="side">
+          <img src="../static/images/kisspng-delivery-courier-portable-network-graphics-vector-5d333275e73842.1254566415636363419471.png" alt="">
+      </section>
+  
+      <section class="main">
+          <div class="login-container">
+              <p class="title">Welcome back</p>
+              <div class="separator"></div>
+              <p class="welcome-message">Please, provide login credential to proceed and have access to all our services</p>
+             
+              <form action="/" method="POST" class="login-form">
+                  <div class="form-control">
+                      <input type="text" placeholder="Username" name="nim" required>
+                      <i class="fas fa-user"></i>
+                  </div>
+                  <div class="form-control">
+                      <input type="password" placeholder="Password" name="password" required>
+                      <i class="fas fa-lock"></i>
+                  </div>
+  
+                  <button class="submit">Login</button>
+              </form>
+          </div>
+      </section>
+      
+  </body>
+  </html>
+
+
+
+
+  <!-- jika masi berikukuh dengan SCSS
+     <div class="wrapper">
+    <div class="login-text">
+      <button class="cta"><i class="fas fa-chevron-down fa-1x"></i></button>
+      <div class="text">
+        <a href="">Login</a>
+        <hr>
+        <br>
+        <input type="text" placeholder="Username">
+        <br>
+        <input type="password" placeholder="Password">
+        <br>
+        <button class="login-btn">Log In</button>
+        <button class="signup-btn">Sign Up</button>
+      </div>
+    </div>
+    <div class="call-text">
+      <h1>Show us your <span>creative</span> side</h1>
+      <button>Join the Community</button>
+    </div>
+  </div>
+-->
+<!-- 
 <h1>LOGIN FORM</h1>
 
 <form action="/" method="POST">
@@ -5,3 +71,4 @@
     <input type="text" name="password" required/>
     <input type="submit"/>
 </form>
+-->
