@@ -1,19 +1,17 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-      <title>Login landing page</title>
-      {% block head %}{% endblock %}
-  </head>
-  <body>
+  {% extends 'base.html' %}
+
+  {%block head %} 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <title>Login landing page</title>
+  {% endblock %}
+  
+  {% block body %}
+
       <section class="side">
           <img src="../static/images/kisspng-delivery-courier-portable-network-graphics-vector-5d333275e73842.1254566415636363419471.png" alt="">
       </section>
-  
       <section class="main">
           <div class="login-container">
               <p class="title">Welcome back</p>
@@ -32,11 +30,11 @@
   
                   <button class="submit">Login</button>
               </form>
+              <a class='about' href="about"> about us </a>
           </div>
       </section>
-      
-  </body>
-  </html>
+  
+  {%  endblock %}
 
 
 

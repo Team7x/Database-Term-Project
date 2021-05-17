@@ -1,3 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/show.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+<title>Lihat Data</title>
+
+{% endblock %}
+
+{% block body %}
+<div class="header">
+  <h1 class="logo"><a>JNY</a></h1>
+<ul class="main-nav">
+        <li><a href="/menu">Home</a></li>
+        <li><a href="/logoutbye">Logout</a></li>
+</ul>
+</div> 
+
+<div class="pricing">
+  <div class="pricing-plan">
+    <a href="/show/order">
+      <img class="image1" src="{{url_for('static', filename='images/clipboard.png')}}"/>
+    <li><a href="/show/order">Show Order</a></li>
+    </a>
+  </div>
+
+<div class="pricing-plan">
+    <a href="/show/kurir">
+      <img class="image1" src="{{url_for('static', filename='images/paket.jpg')}}"/>
+      <li><a class="text" href="/show/kurir">Show Kurir</a> </li>
+    </a>
+  </div>
+
+  <div class="pricing-plan">
+    <a href="/show/kota">
+      <img class="image1" src="{{url_for('static', filename='images/kota.jpg')}}"/>
+      <li><a class="text" href="/show/kota">Show Kota</a> </li>
+    </a>
+  </div>
+
+  <div class="pricing-plan">
+    <a href="/show/tipe">
+      <img class="image1" src="{{url_for('static', filename='images/choice.jpg')}}"/>
+      <li><a class="text" href="/show/tipe">Show Tipe</a> </li>
+    </a>
+  </div>
+
+  <div class="pricing-plan">
+    <a href="/show/graphic">
+      <img class="image1" src="{{url_for('static', filename='images/graf.png')}}"/>
+      <li><a class="text" href="/show/graphic">Show Graphic</a> </li>
+    </a>
+  </div>
+
+</div>
+ {% endblock %}
+
+
+
+<!-- 
 <div class="content">
     <h1 style="text-align: center">Lihat</h1>
     <a href="/show/order">SHOW ORDER</a>
@@ -16,3 +76,4 @@
     <a href="/logoutbye">LOG OUT</a>
     <br>
 </div>
+-->

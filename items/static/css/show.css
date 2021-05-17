@@ -36,30 +36,35 @@ body{
        text-align: center;
    }
 
+   .home {
+    width:30px;
+    padding-top: 0px;
+  }
+
 .pricing {
     display: flex;
     justify-content: space-between;
-    max-width: 960px;
+    max-width: 90%;
     margin: auto;
   }
   .pricing-plan {
     flex: 1;
     background-color: #ffffff;
-    margin: 20% 8px;
+    margin: 15% 8px;
     padding: 80px 40px 80px 40px;
     border-radius: 6px;
     color: rgb(0, 0, 0);
   }
    .pricing li a{
        text-decoration: none;
-       font-size: 30px;
+       font-size: 25px;
        color: #6E6E6D;
    }
    .pricing * {
     display: inline;
   }
   .pricing-plan img {
-    width: 60%;
+    width: 75%;
     display:block;
     margin-left:auto;
     margin-right:auto;

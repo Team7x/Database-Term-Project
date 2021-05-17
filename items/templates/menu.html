@@ -1,58 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+<title>Menu</title>
+{% endblock %} 
+
+{% block body %}
+<div class="header">
+  <h1 class="logo"><a>JNY</a></h1>
+<ul class="main-nav">
+      <li><a href="/logoutbye">Logout</a></li>
+</ul>
+</div> 
+
+<div class="pricing">
+  <div class="pricing-plan">
+    <a class="text" href="show">
+      <img class="image1" src="{{url_for('static', filename='images/kurir.jpg')}}"/>
+    <li><a href="show">Lihat Data</a></li>
+    </a>
+  </div>
+
+<div class="pricing-plan">
+    <a class="text" href="/input/order">
+      <img class="image1" src="{{url_for('static', filename='images/Order.jpg')}}"/> 
+      <li><a class="text" href="/input/order">Input Order</a> </li>
+    </a>
+  </div>
+
+</div>
+{% endblock %}
+
+
+
 <!-- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 30px 50px;
-}
-
-.row {margin: 0 -5px;}
-
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 100px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
-</style>
-</head>
 <body>
 
+<div class="header">
+  <h1 class="logo"><a></a></h1>
+  <ul class="main-nav"> 
+    <li><a href="/logoutbye">LOG OUT</a></li>
+  </ul>  
+</div>
 
 <div class="row">
   <div class="column">
     <div class="card">
-      <h3>Card 1</h3>
+      <a href="show">LIHAT DATA</a>
       <p>Some text</p>
       <p>Some text</p>
     </div>
@@ -60,16 +55,19 @@ body {
 
   <div class="column">
     <div class="card">
-      <h3>Card 4</h3>
+      <a href="/input/order">INPUT ORDER</a>
       <p>Some text</p>
       <p>Some text</p>
     </div>
   </div>
+
 </div>
 
 </body>
 </html>
 -->
+
+<!-- 
 <div class="content">
     <h1 style="text-align: center">TEST</h1>
     <a href="show">LIHAT DATA</a>
@@ -80,3 +78,4 @@ body {
     <a href="/logoutbye">LOG OUT</a>
     <br>
 </div>
+-->
