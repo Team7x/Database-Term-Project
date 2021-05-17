@@ -8,7 +8,7 @@ html,body{
     height: 100%;
     width: 100%;
     place-items: center;
-    background: linear-gradient(to top, #7927b2, #fb3182);
+    background: #FAD0C9;
 }
 
 .wrapper{

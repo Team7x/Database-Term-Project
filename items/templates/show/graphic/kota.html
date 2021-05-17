@@ -1,6 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kota.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo"><a>JNY</a></h1>
+      <ul class="main-nav">
+              <li><a href="/menu">Home</a></li>
+              <li><a href="/logoutbye">Logout</a></li>
+      </ul>
+    </div> 
+    <div class="wrapper">
+        <h1>GRAPH KOTA</h1>
+        <br>
+        <div class="poto">
+            <img src="{{graphkota_pic}}"/>
+        </div>
+        <a id="bck" href="/show/graphic">BACK</a>
+    </div>
+    
+</body>
+</html>
+<!-- 
+
 <a href="/show/graphic">BACK</a>
 <class>GRAPHIC</class>
 <br>
 <div class="poto">
     <img src="{{graphkota_pic}}"/>
 </div>
+
+-->

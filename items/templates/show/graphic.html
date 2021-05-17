@@ -1,4 +1,46 @@
-<div class="content">
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/show.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+<title>Lihat Data</title>
+
+{% endblock %}
+
+{% block body %}
+<div class="header">
+  <h1 class="logo"><a>JNY</a></h1>
+<ul class="main-nav">
+        <li><a href="/menu">Home</a></li>
+        <li><a href="/logoutbye">Logout</a></li>
+</ul>
+</div> 
+
+<div class="pricing">
+  <div class="pricing-plan">
+    <a href="/show/graphic/kota">
+      <img class="image1" src="{{url_for('static', filename='images/kota.jpg')}}"/>
+      <li><a class="text" href="/show/graphic/kota">Graphic Kota</a> </li>
+    </a>
+  </div>
+
+  <div class="pricing-plan">
+    <a href="/show/graphic/tipe">
+      <img class="image1" src="{{url_for('static', filename='images/choice.jpg')}}"/>
+      <li><a class="text" href="/show/graphic/tipe">Show Tipe</a> </li>
+    </a>
+  </div>
+
+  <div class="pricing-plan">
+    <a href="/show/graphic/kurir">
+      <img class="image1" src="{{url_for('static', filename='images/graf.png')}}"/>
+      <li><a class="text" href="/show/graphic/kurir">Show Kurir</a> </li>
+    </a>
+  </div>
+</div>
+ {% endblock %}
+
+<!--<div class="content">
     <h1 style="text-align: center">Lihat</h1>
     <a href="/show/graphic/kota">GRAPHIC KOTA</a>
     <br>
@@ -7,4 +49,5 @@
     <a href="/show/graphic/tipe">GRAPHIC TIPE</a>
     <br>
     <a href="/show">BALIK</a>
-</div>
+</div> -->
+
