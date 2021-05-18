@@ -49,7 +49,7 @@ html,body{
 
 .wrapper{
     width: 600px;
-    height: 720px;
+    height: 780px;
     position: relative;
     margin: 6% auto;
     background: white;
@@ -57,6 +57,7 @@ html,body{
     overflow: auto;
     line-height: 20px;
     border-radius: 7px;
+    margin-top: 170px;
 }
 h1{
     text-align: center;
@@ -73,6 +74,7 @@ input {
     border-bottom: 1px solid #999;
     outline: none;
     background: transparent;
+    font-size: 20px;
 }
 
 button{
@@ -85,6 +87,7 @@ button{
     cursor: pointer;
     display: block;
     margin: auto;
+    top: -60px;
     background: #FAD0C9;
     border: 0;
     outline: none;
