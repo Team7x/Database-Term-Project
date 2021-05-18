@@ -671,7 +671,7 @@ def graptipe():
         return redirect('/')
 
 
-@app.route('/logoutbye')
+@app.route('/logoutbye/')
 def logoutbye():
     global loguser
     try:
