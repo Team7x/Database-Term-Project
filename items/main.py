@@ -541,10 +541,10 @@ def showgraph():
 
 @app.route('/show/graphic/kota')
 def grapkota():
-    # try:
-    #     if loguser.nim() == "":
-    #         return redirect('/')
-    #     else:
+    try:
+        if loguser.nim() == "":
+            return redirect('/')
+        else:
 
             global urutKo
             urutKo= urutKo+1
@@ -576,8 +576,8 @@ def grapkota():
             plt.switch_backend('agg')
             
             return render_template('show/graphic/kota.html', graphkota_pic=image_file)
-    # except:
-    #     return redirect('/')
+    except:
+        return redirect('/')
 
 @app.route('/show/graphic/kurir')
 def grapkurir():
@@ -679,3 +679,11 @@ def logoutbye():
         return redirect('/')
     except:
         return redirect('/')
+
+@app.route('/selesai/<int:id>')
+def selesai(id):
+    cur = mysql.connection.cursor()
+    cur.execute(f"update order2 set id_status='1' where resi='{id}'")
+    cur.connection.commit()
+
+    return redirect('/show/order')
