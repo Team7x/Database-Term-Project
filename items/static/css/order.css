@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 html,body{
     display: grid;
@@ -25,12 +25,13 @@ html,body{
   .logo{
     text-align: center;
     padding-left:96px;
+    padding-right:75%;
 }
 .header * {
     display: inline;
   }
   .header li{
-    padding: 10px 15px;
+    padding: 10px 20px;
     margin: 20px;
   }
   .header li a{
