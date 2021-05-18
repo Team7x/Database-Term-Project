@@ -341,10 +341,10 @@ def showkurir():
 
 @app.route('/editOrder/<int:id>', methods=['POST','GET'])
 def editOrder(id):
-    try:
-        if loguser.nim() == "":
-            return redirect('/')
-        else:
+    #try:
+        # if loguser.nim() == "":
+        #   return redirect('/')
+        #else:
 
             if request.method == 'POST':
                 namabaru = request.form['namabaru']
@@ -381,8 +381,8 @@ def editOrder(id):
                 return render_template('/edit/order.html', orderDetail=orderDetail, id=id, judul=judul)
                 #except:
                 #return "ada yang salah"
-    except:
-        return redirect('/')
+    #except:
+        #return redirect('/')
 
 @app.route('/editKurir/<int:id>', methods=['POST','GET'])
 def editKurir(id):
@@ -417,7 +417,7 @@ def editKurir(id):
                     kurir = kurir[0]
                     judul = ['NIP', 'ID Tipe', 'Nama Kurir', 'Tanggal Masuk', 'Alamat Kurir', 'No Telp',\
                     'Tipe Pengiriman', 'Harga Tipe', 'Estimasi Lama Pengiriman', 'Banyak Order']
-                    return render_template('edit/editcontohsaet.html',kurir=kurir, banyakOrder=banyakOrder, id=id, judul=judul)
+                    return render_template('edit/kurir.html',kurir=kurir, banyakOrder=banyakOrder, id=id, judul=judul)
                 except:
                     return "ada yang error"
     except:

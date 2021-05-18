@@ -1,46 +1,86 @@
- 
-<div class="content">
-    <h1 style="text-align: center">detail order</h1>
-    <table>
-    {% for j in range(0, orderDetail | length) %}
-        <tr>
-        {% if j == 17 %}
-        <th>
-        {{judul[j]}}
-        </th>
-        <th>
-        {{orderDetail[j]/2}}
-        </th>
-        {% else %}
-        <th>
-        {{judul[j]}}
-        </th>
-        <th>
-        {{orderDetail[j]}}
-        </th>
-        {% endif %}
-        </tr>
-    {% endfor %}
-    </table>
-</div>
+{% extends 'base.html' %}
 
-<div class="form">
-    <form action="/editOrder/{{id}}" method="POST">
-        <br>
-        <br>
-        <a>EDIT DATA</a>
-        <br>
-        <label>Nama penerima baru: </label>
-        <input type="text" name="namabaru">
-        <br>
-        <label>No. telp penerima baru: </label>
-        <input type="text" name="nobaru">
-        <br>
-        <label>Alamat penerima baru (kota yang sama): </label>
-        <input type="text" name="addrbaru">
-        <br>
-        <input type="submit" value="ganti data">
-    </form>
-</div>
+{% block head %}
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "{{ url_for ('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/kurir3.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type="text/css">
+<!--===============================================================================================-->
+<title>List Kurir</title>
+{% endblock %}
 
-<a href="/show/order">balik</a>
+{% block body %}
+
+<div class="header-bar">
+    <h1 class="logo"><a>JNY</a></h1>
+  <ul class="main-nav">
+          <li><a href="/menu">Home</a></li>
+          <li><a href="/show">Menu</a></li>
+          <li><a href="/logoutbye">Logout</a></li>
+  </ul>
+  </div> 
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <h1 style="text-align: center">Detail Order</h1>
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            Label
+                        </div>
+                        <div class="cell">
+                            Isi
+                        </div>
+                    </div>
+                    
+                {% for j in range(0, orderDetail | length) %}
+                    <div class="row">
+                        {% if j == 17 %}
+                        <div class="cell" data-title="NIP">
+                            {{judul[j]}}
+                        </div>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{orderDetail[j]/2}}X
+                        </div>
+                        {% else %}
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{judul[j]}}
+                        </div>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{orderDetail[j]}}
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}   
+                </div>
+
+                <form action="/editOrder/{{id}}" method="POST">
+                    <br>
+                    <a>EDIT DATA</a>
+                    <br>
+                    <a> Nama Penerima Baru: </a>
+                    <input type="text" name="namabaru" id="content">
+                    <br>
+                    <a>No. telp penerima baru: </a>
+                    <input type="text" name="nobaru" id="content">
+                    <br>
+                    <a>Alamat penerima baru (kota yang sama): </a>
+                    <input type="text" name="addrbaru" id="content">
+                    <br>
+                    <input type="submit" value="Ganti Data">
+                </form>
+                
+        </div>
+    </div>
+</div>
+{% endblock %}

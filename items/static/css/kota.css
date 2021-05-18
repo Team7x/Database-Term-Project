@@ -41,10 +41,16 @@ html,body{
        text-align: center;
    }
 
+   @media (min-width: 1025px) {
+    .header {
+      justify-content: space-between;
+    }
+}
    .home {
     width:30px;
     padding-top: 0px;
   }
+
 
 .wrapper{
     width: 1000px;

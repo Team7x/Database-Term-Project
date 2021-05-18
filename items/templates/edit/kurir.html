@@ -1,3 +1,87 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "{{ url_for ('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/kurir3.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type="text/css">
+<!--===============================================================================================-->
+<title>List Kurir</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="header-bar">
+    <h1 class="logo"><a>JNY</a></h1>
+  <ul class="main-nav">
+          <li><a href="/menu">Home</a></li>
+          <li><a href="/show">Menu</a></li>
+          <li><a href="/logoutbye">Logout</a></li>
+  </ul>
+  </div> 
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <h1 style="text-align: center">Tipe Pengiriman</h1>
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            Label
+                        </div>
+                        <div class="cell">
+                            Isi
+                        </div>
+                    </div>
+                    
+                {% for j in range(0, kurir | length) %}
+                    <div class="row">
+                        <div class="cell" data-title="NIP">
+                            {{judul[j]}}
+                        </div>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{kurir[j]}}
+                        </div>
+                    </div>
+                {% endfor %}   
+                        
+                    <div class="row">
+                        <div class="cell" data-title="NIP">
+                            Banyak Order
+                        </div>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{banyakOrder}}
+                        </div>
+                    </div>
+                </div>
+                <form action="/editKurir/{{id}}" method="POST">
+                    <br>
+                    <a>EDIT DATA</a>
+                    <br
+                    <label>No. telp kurir baru: </label>
+                    <input type="text" name="nobaru" id="content">
+                    <br>
+                    <label>Alamat kurir baru: </label>
+                    <input type="text" name="addrbaru" id="content">
+                    <br>
+                    <input type="submit" value="ganti data">
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!-- 
 <div class="content">
     <h1 style="text-align: center">detail kurir</h1>
     <table>
@@ -39,3 +123,4 @@
 </div>
 
 <a href="/show/kurir">balik</a>
+-->

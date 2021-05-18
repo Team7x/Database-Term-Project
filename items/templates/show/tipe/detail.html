@@ -1,4 +1,111 @@
+{% extends 'base.html' %}
 
+{% block head %}
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "{{ url_for ('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/kurir1.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type="text/css">
+<!--===============================================================================================-->
+<title>List Kurir</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="header-bar">
+    <h1 class="logo"><a>JNY</a></h1>
+  <ul class="main-nav">
+          <li><a href="/menu">Home</a></li>
+          <li><a href="/show">Menu</a></li>
+          <li><a href="/logoutbye">Logout</a></li>
+  </ul>
+  </div> 
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <h1 style="text-align: center">List Kurir {{namatipe}}</h1>
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            NIP
+                        </div>
+                        <div class="cell">
+                            NAMA KURIR
+                        </div>
+                        <div class="cell">
+                            TGL MASUK
+                        </div>
+                        <div class="cell">
+                            ALAMAT KURIR
+                        </div>
+                        <div class="cell">
+                            NO TELP KURIR
+                        </div>
+                        <div class="cell">
+                            ID TIPE
+                        </div>
+                        <div class="cell">
+                            BANYAK ORDER
+                        </div>
+                        <div class="cell">
+                            
+                        </div>
+                        
+                    </div>
+                    {% for k in range(0, kurir| length) %}
+                        <div class="row">
+                            <div class="cell" data-title="NIP">
+                                {{ kurir[k][0] }}
+                            </div>
+                            <div class="cell" data-title="NAMA KURIR">
+                                {{ kurir[k][1] }}
+                            </div>
+                            <div class="cell" data-title="TGL MASUK">
+                                {{ kurir[k][2] }}
+                            </div>
+                            <div class="cell" data-title="ALAMAT KURIR">
+                                {{ kurir[k][3] }}
+                            </div>
+                            <div class="cell" data-title="NO TELP KURIR">
+                                {{ kurir[k][4] }}
+                            </div>
+                            <div class="cell" data-title="ID TIPE">
+                                <a href=/show/tipe>{{ kurir[k][5] }}</a>
+                            </div>
+                            <div class="cell" data-title="BANYAK ORDER">
+                                {{ banyakOrder[k] }}
+                            </div>
+
+                            <div class="cell" data-title="">
+                                <a href=/editKurir/{{kurir[k][0]}}>edit</a>
+                                <br>
+                                <a href=/delKurir/{{kurir[k][0]}}>hapus</a>
+                            </div>
+                            <form style="text-align: center"  method="post">
+                            </form>
+                        </div>
+                        {% endfor %}
+                        <a href="/input/kurir">INPUT Kurir</a>
+                        <br>
+                        <a class="back" href="/show">Kembali</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!-- 
 <div class="content">
     <h1 style="text-align: center">LIST KURIR {{namatipe}}</h1>
     <table>
@@ -30,3 +137,4 @@
     </table>
 </div>
 <a href="/show/tipe">balik</a>
+-->
