@@ -68,7 +68,7 @@ def inputorder():
             }
             for i in dataKurir:
                 cur = mysql.connection.cursor()
-                cur.execute(f"select namaTipe from tipe where id_tipe={i[5]}")
+                cur.execute(f"select namaTipe from tipe where id_tipe=(select id_tipe from kurir where nip={i[0]})")
                 temp = cur.fetchall()
                 detailKurir["tipe"].append(temp[0][0])
                 detailKurir["idkurir"].append(i[0])
