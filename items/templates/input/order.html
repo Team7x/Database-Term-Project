@@ -8,39 +8,47 @@
     <title>Input Order</title>
 </head>
 <body>
+    <div class="header">
+        <h1 class="logo"><a>JNY</a></h1>
+      <ul class="main-nav">
+              <li><a href="/menu">Home</a></li>
+              <li><a href="/logoutbye">Logout</a></li>
+      </ul>
+    </div> 
     <div class="wrapper">
-        <h1>INPUT ORDER</h1>
-        <br>
-        <input type="text" name="resi" placeholder="Resi" required/>
-        <br> <br>
-        <input type="text" name="namapengirim" placeholder="Nama Pengirim" required/>
-        <br> <br>
-        <input type="text" name="namapenerima" placeholder="Nama Penerima" required/>
-        <br> <br>
-        <input type="text" name="notelppengirim" placeholder="Telepon Pengirim" required/>
-        <br> <br>
-        <input type="text" name="notelppenerima" placeholder="Telepon Penerima" required/>
-        <br> <br>
-        <input type="text" name="alamatpenerima" placeholder="Alamat Penerima" required/>
-        <br> <br>
-        <input type="number" min="1" name="beratbarang" placeholder="Berat Barang" required/>
-        <br> <br>
-        <label for="nip">Kurir </label>
-        <select class="opt" name="nip" id="nip" required>
-            {% for t in range(0, detailKurir['idkurir'] | length) %}
-            <option value={{ detailKurir['idkurir'][t] }}>{{detailKurir['tipe'][t]}} - {{detailKurir['nama'][t]}}</option>
-            {% endfor %}
-        </select>
-        <br> <br>
-        <label for="id_kota">Kota </label>
-        <select class="opt" name="id_kota" id="id_kota" required>
-            {% for t in dataKota %}
-            <option value={{t[0]}}>{{t[1]}}</option>
-            {% endfor %}
-        </select>
-        <br> <br> <br>
-        <button type="submit" class="login-btn">Submit</button>
-</form>
+        <form method="post" action='/input/order'>
+            <h1>INPUT ORDER</h1>
+            <br>
+            <input type="text" name="resi" placeholder="Resi" required/>
+            <br> <br>
+            <input type="text" name="namapengirim" placeholder="Nama Pengirim" required/>
+            <br> <br>
+            <input type="text" name="namapenerima" placeholder="Nama Penerima" required/>
+            <br> <br>
+            <input type="text" name="notelppengirim" placeholder="Telepon Pengirim" required/>
+            <br> <br>
+            <input type="text" name="notelppenerima" placeholder="Telepon Penerima" required/>
+            <br> <br>
+            <input type="text" name="alamatpenerima" placeholder="Alamat Penerima" required/>
+            <br> <br>
+            <input type="number" min="1" name="beratbarang" placeholder="Berat Barang" required/>
+            <br> <br>
+            <label for="nip">Kurir </label>
+            <select class="opt" name="nip" id="nip" required>
+                {% for t in range(0, detailKurir['idkurir'] | length) %}
+                <option value={{ detailKurir['idkurir'][t] }}>{{detailKurir['tipe'][t]}} - {{detailKurir['nama'][t]}}</option>
+                {% endfor %}
+            </select>
+            <br> <br>
+            <label for="id_kota">Kota </label>
+            <select class="opt" name="id_kota" id="id_kota" required>
+                {% for t in dataKota %}
+                <option value={{t[0]}}>{{t[1]}}</option>
+                {% endfor %}
+            </select>
+            <br> <br> <br>
+            <button type="submit" class="login-btn">Submit</button>
+        </form>
     </div>
 </body>
 </html>
