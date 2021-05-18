@@ -36,55 +36,51 @@
 
                     <div class="row header">
                         <div class="cell">
-                            ID TIPE
+                            Label
                         </div>
                         <div class="cell">
-                            NAMA TIPE
+                            Isi
                         </div>
-                        <div class="cell">
-                            HARGA TIPE
-                        </div>
-                        <div class="cell">
-                            LAMA PENGIRIMAN
-                        </div>
-                        <div class="cell">
-                            BANYAK
-                        </div>
-                        <div class="cell">
-                            DETAILS
-                        </div>
-                  
                     </div>
-                    {% for k in range(0, tipe| length) %}
-                        <div class="row">
-                            <div class="cell" data-title="NIP">
-                                {{ tipe[k][0] }}
-                            </div>
-                            <div class="cell" data-title="NAMA KURIR">
-                                {{ tipe[k][1] }}
-                            </div>
-                            <div class="cell" data-title="TGL MASUK">
-                                {{ tipe[k][2]/2 }}
-                            </div>
-                            <div class="cell" data-title="ALAMAT KURIR">
-                                {{ tipe[k][3] }}
-                            </div>
-                            <div class="cell" data-title="BANYAK ORDER">
-                                {{ banyakOrder[k] }}
-                            </div>
-                            
-                            <div class="cell" data-title="">
-                                <a href="/show/tipe/detail/{{ tipe[k][0] }}">SHOW</a>
-                            </div>
-                            <form style="text-align: center"  method="post">
-                            </form>
+                    
+                {% for j in range(0, kurir | length) %}
+                    <div class="row">
+                        <div class="cell" data-title="NIP">
+                            {{judul[j]}}
                         </div>
-                        {% endfor %}
-                        <a class="back" href="/show">Kembali</a>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{kurir[j]}}
+                        </div>
+                    </div>
+                {% endfor %}   
+                        
+                    <div class="row">
+                        <div class="cell" data-title="NIP">
+                            Banyak Order
+                        </div>
+                        <div class="cell" data-title="NAMA KURIR">
+                            {{banyakOrder}}
+                        </div>
                     </div>
                 </div>
         </div>
     </div>
+</div>
+
+<div class="form">
+    <form action="/editKurir/{{id}}" method="POST">
+        <br>
+        <br>
+        <a>EDIT DATA</a>
+        <br
+        <label>No. telp kurir baru: </label>
+        <input type="text" name="nobaru">
+        <br>
+        <label>Alamat kurir baru: </label>
+        <input type="text" name="addrbaru">
+        <br>
+        <input type="submit" value="ganti data">
+    </form>
 </div>
 {% endblock %}
 

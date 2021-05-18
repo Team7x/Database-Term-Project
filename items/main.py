@@ -293,6 +293,10 @@ def showtipekurir(id):
                 else:
                     return render_template('/show/tipe.html')
             else:
+                cur = mysql.connection.cursor()
+                cur.execute(f"select namaTipe from tipe where id_tipe='{id}'")
+                nama_tipe= cur.fetchall()
+                nama_tipe= nama_tipe[0][0]
 
                 cur = mysql.connection.cursor()
                 cur.execute(f"select * from kurir where id_tipe='{id}'")
@@ -304,7 +308,7 @@ def showtipekurir(id):
                     banyakOrder.append(temp[0][0])
                 cur.close()
 
-                return render_template('/show/tipe/detail.html',kurir=kurir, banyakOrder=banyakOrder)    
+                return render_template('/show/tipe/detail.html',kurir=kurir, banyakOrder=banyakOrder, namatipe=nama_tipe)    
     except:
         return redirect('/')
 
@@ -413,7 +417,7 @@ def editKurir(id):
                     kurir = kurir[0]
                     judul = ['NIP', 'ID Tipe', 'Nama Kurir', 'Tanggal Masuk', 'Alamat Kurir', 'No Telp',\
                     'Tipe Pengiriman', 'Harga Tipe', 'Estimasi Lama Pengiriman', 'Banyak Order']
-                    return render_template('/edit/kurir.html',kurir=kurir, banyakOrder=banyakOrder, id=id, judul=judul)
+                    return render_template('edit/editcontohsaet.html',kurir=kurir, banyakOrder=banyakOrder, id=id, judul=judul)
                 except:
                     return "ada yang error"
     except:
@@ -679,6 +683,10 @@ def logoutbye():
         return redirect('/')
     except:
         return redirect('/')
+
+@app.route('/contohedit', methods=['POST','GET'])
+def contohedit():
+    return render_template('edit/editcontohsaet.html')
 
 @app.route('/selesai/<int:id>')
 def selesai(id):
