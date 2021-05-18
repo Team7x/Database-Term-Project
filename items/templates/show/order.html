@@ -1,4 +1,147 @@
+{% extends 'base.html' %}
 
+{% block head %}
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href= "{{ url_for ('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='css/showorder.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type="text/css">
+<!--===============================================================================================-->
+<title>List Order</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="header-bar">
+    <h1 class="logo"><a>JNY</a></h1>
+  <ul class="main-nav">
+          <li><a href="/menu">Home</a></li>
+          <li><a href="/show">Menu</a></li>
+          <li><a href="/logoutbye">Logout</a></li>
+  </ul>
+  </div> 
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <h1 style="text-align: center">List Order</h1>
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            RESI
+                        </div>
+                        <div class="cell">
+                            NAMA PENGIRIM
+                        </div>
+                        <div class="cell">
+                            NAMA PENERIMA
+                        </div>
+                        <div class="cell">
+                            NO TELP PENGIRIM
+                        </div>
+                        <div class="cell">
+                            NO TELP PENERIMA
+                        </div>
+                        <div class="cell">
+                            ALAMAT PENERIMA
+                        </div>
+                        <div class="cell">
+                            BERAT BARANG
+                        </div>
+                        <div class="cell">
+                            TGL PENGIRIMAN
+                        </div>
+                        <div class="cell">
+                            HARGA TOTAL
+                        </div>
+                        <div class="cell">
+                            NIP
+                        </div>
+                        <div class="cell">
+                            ID KOTA
+                        </div>
+                        <div class="cell">
+                            ID STATUS
+                        </div>
+                        <div class="cell">
+                            ESTIMASI
+                        </div>
+                        <div class="cell">
+                            
+                        </div>
+                    </div>
+                    {% for k in order2 %}
+                        <div class="row">
+                            <div class="cell" data-title="RESI">
+                                {{ k[0] }}
+                            </div>
+                            <div class="cell" data-title="NAMA PENGIRIM">
+                                {{ k[1] }}
+                            </div>
+                            <div class="cell" data-title="NAMA PENERIMA">
+                                {{ k[2] }}
+                            </div>
+                            <div class="cell" data-title="NO TELP PENGIRIM">
+                                {{ k[3] }}
+                            </div>
+                            <div class="cell" data-title="NO TELP PENERIMA">
+                                {{ k[4] }}
+                            </div>
+                            <div class="cell" data-title="ALAMAT PENERIMA">
+                                {{ k[5] }}
+                            </div>
+                            <div class="cell" data-title="BERAT BARANG">
+                                {{ k[6] }}
+                            </div>
+                            <div class="cell" data-title="TGL PENGIRIMAN">
+                                {{ k[7] }}
+                            </div>
+                            <div class="cell" data-title="HARGA TOTAL">
+                                {{ k[8] }}
+                            </div>
+                            <div class="cell" data-title="NIP">
+                                {{ k[9] }}
+                            </div>
+                            <div class="cell" data-title="ID KOTA">
+                                {{ k[10] }}
+                            </div>
+                            <div class="cell" data-title="ID STATUS">
+                                {{ k[11] }}
+                            </div>
+                            <div class="cell" data-title="ESTIMASI">
+                                {{ k[12] }}
+                            </div>
+    
+                            <div class="cell" data-title="">
+                                <a href="/selesai/{{k[0]}}">SELESAI</a>
+                                <br>
+                                <a href="/editOrder/{{k[0]}}">EDIT</a>
+                                <br>
+                                <a href=/delO/{{k[0]}}>hapus</a>
+                            </div>
+                            <form style="text-align: center"  method="post">
+                            </form>
+                        </div>
+                        {% endfor %}
+                        <a href="/input/order">INPUT ORDER</a>
+                        <br>
+                        <a class="back" href="/show">Kembali</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- 
 <div class="content">
     <h1 style="text-align: center">LIST ORDER</h1>
     <table>
@@ -34,8 +177,6 @@
                 <td>{{ k[11] }}</td>
                 <td>{{ k[12] }}</td>
                 <td>
-                <a href="/selesai/{{k[0]}}">SELESAI</a>
-                <br>
                 <a href="/editOrder/{{k[0]}}">EDIT</a>
                 <br>
                 <a href=/delO/{{k[0]}}>hapus</a>
@@ -49,3 +190,4 @@
 </div>
 
 <a href="/show">balik</a>
+-->
