@@ -69,7 +69,7 @@
                             ID KOTA
                         </div>
                         <div class="cell">
-                            ID STATUS
+                            STATUS
                         </div>
                         <div class="cell">
                             ESTIMASI
@@ -114,15 +114,21 @@
                                 {{ k[10] }}
                             </div>
                             <div class="cell" data-title="ID STATUS">
-                                {{ k[11] }}
+                                {% if k[11] == 1 %}
+                                Terkirim
+                                {% else %}
+                                Dalam Proses
+                                {% endif %}
                             </div>
                             <div class="cell" data-title="ESTIMASI">
                                 {{ k[12] }}
                             </div>
     
                             <div class="cell" data-title="">
+                                {% if k[11] == 0 %}
                                 <a href="/selesai/{{k[0]}}">SELESAI</a>
                                 <br>
+                                {% endif %}
                                 <a href="/editOrder/{{k[0]}}">EDIT</a>
                                 <br>
                                 <a href=/delO/{{k[0]}}>hapus</a>
