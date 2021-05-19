@@ -700,3 +700,7 @@ def selesai(id):
     cur.connection.commit()
 
     return redirect('/show/order')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
