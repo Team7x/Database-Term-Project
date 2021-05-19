@@ -109,18 +109,23 @@ def inputorder():
                 tgl = (f'{x.year}-{x.month}-{int(x.day)+lama}')
 
                 cur.close()
-                cur = mysql.connection.cursor()
+                try:
+                    cur = mysql.connection.cursor()
 
-                cur.execute("""INSERT INTO order2 (resi,namaPengirim,namaPenerima,no_telp_pengirim,
-                no_telp_penerima,alamat_penerima,beratBarang,tgl_pengiriman,hargaTotal,nip,id_kota,id_status,estimasi) 
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (a,b,c,d,e,f,g,datetime.date.today(),hargaTipe,j,k,'0',tgl))
-                mysql.connection.commit()
+                    cur.execute("""INSERT INTO order2 (resi,namaPengirim,namaPenerima,no_telp_pengirim,
+                    no_telp_penerima,alamat_penerima,beratBarang,tgl_pengiriman,hargaTotal,nip,id_kota,id_status,estimasi) 
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (a,b,c,d,e,f,g,datetime.date.today(),hargaTipe,j,k,'0',tgl))
+                    mysql.connection.commit()
 
-                cur.close()
+                    cur.close()
 
-                return redirect('/show/order')
+                    return redirect('/show/order')
+
+                except:
+                    return "gagal menginputkan"
                 
-            return render_template('/input/order.html', dataKota=dataKota, dataKurir=dataKurir, detailKurir=detailKurir)
+            else:
+                return render_template('/input/order.html', dataKota=dataKota, dataKurir=dataKurir, detailKurir=detailKurir)
 
     except:
         return redirect('/')
@@ -368,15 +373,15 @@ def editOrder(id):
             else:
                 #try:
                 cur = mysql.connection.cursor()
-                cur.execute(f"""SELECT order2.*, namaKurir, no_telp_Kurir, hargaKota,
+                cur.execute(f"""SELECT order2.*, namaKurir, namaKota, no_telp_Kurir, hargaKota,
                 namaTipe, hargaTipe
                 FROM order2 NATURAL JOIN kurir NATURAL JOIN tipe NATURAL JOIN kota where resi='{id}'
                 """)
                 orderDetail = cur.fetchall()
                 orderDetail = orderDetail[0]
                 cur.close()
-                judul = ['RESI', 'Nama Pengirim', 'Nama Penerima', 'No Telp Pengirim', 'No Telp Penerima', 'Kota Tujuan', 'Berat Barang',\
-                'Tanggal pengiriman', 'Harga Bayar Total', 'NIP Kurir', 'ID Tipe', 'Status', 'Estimasi Sampai', 'Nama Kurir',\
+                judul = ['RESI', 'Nama Pengirim', 'Nama Penerima', 'No Telp Pengirim', 'No Telp Penerima', 'Alamat Tujuan', 'Berat Barang',\
+                'Tanggal pengiriman', 'Harga Bayar Total', 'NIP Kurir', 'ID Tipe', 'Status', 'Estimasi Sampai', 'Nama Kurir', 'Nama Kota',\
                 'No Telp Kurir', 'Harga Kota (/kg)', 'Tipe Pengiriman', 'Harga Tipe']
                 return render_template('/edit/order.html', orderDetail=orderDetail, id=id, judul=judul)
                 #except:
