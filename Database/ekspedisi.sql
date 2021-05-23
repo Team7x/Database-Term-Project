@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql6.freesqldatabase.com
--- Generation Time: May 09, 2021 at 11:56 AM
+-- Generation Time: May 23, 2021 at 10:26 AM
 -- Server version: 5.5.62-0ubuntu0.14.04.1
 -- PHP Version: 7.0.33-0ubuntu0.16.04.16
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sql6410548`
+-- Database: `sql6413208`
 --
 
 -- --------------------------------------------------------
@@ -56,6 +56,18 @@ CREATE TABLE `kota` (
   `hargaKota` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kota`
+--
+
+INSERT INTO `kota` (`id_kota`, `namaKota`, `hargaKota`) VALUES
+(1, 'Palembang', 16000),
+(2, 'Jakarta', 13000),
+(3, 'Bali', 20000),
+(4, 'Bandung', 14000),
+(5, 'Manado', 35000),
+(6, 'New Delhi', 139000);
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +82,17 @@ CREATE TABLE `kurir` (
   `no_telp_Kurir` varchar(50) NOT NULL,
   `id_tipe` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kurir`
+--
+
+INSERT INTO `kurir` (`nip`, `namaKurir`, `tgl_masuk`, `alamatKurir`, `no_telp_Kurir`, `id_tipe`) VALUES
+(1, 'Joni', '2021-01-13', 'Jalan Sepuncak', '081285671346', 1),
+(2, 'Odin', '2011-03-16', 'Kemanggisan', '084435234342', 1),
+(3, 'Dino', '2017-01-11', 'Cisalak', '084324321323', 2),
+(4, 'Khloe', '2021-05-05', 'Bevery Hills', '081100001111', 2),
+(5, 'Kurbar', '2021-05-18', 'Jalan Semanggis', '081234567890', 3);
 
 -- --------------------------------------------------------
 
@@ -93,6 +116,17 @@ CREATE TABLE `order2` (
   `estimasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `order2`
+--
+
+INSERT INTO `order2` (`resi`, `namaPengirim`, `namaPenerima`, `no_telp_pengirim`, `no_telp_penerima`, `alamat_penerima`, `beratBarang`, `tgl_pengiriman`, `hargaTotal`, `nip`, `id_kota`, `id_status`, `estimasi`) VALUES
+(543676575, 'Parjo', 'Deka', '085435343426', '085435345654', 'Jalan Denpasar', 8, '2021-05-19', 160000, 1, 3, 1, '2021-05-24'),
+(543676576, 'Sayyid', 'Haris', '08953485023', '081231827122', 'Jalan Sepuncak', 3, '2021-05-19', 96000, 5, 1, 1, '2021-05-20'),
+(543676577, 'Sims', 'Maung', '08123126382', '08187236182', 'Jalan Cambuk Kemayoran', 4, '2021-05-19', 52000, 2, 2, 0, '2021-05-24'),
+(543676578, 'Auau', 'Padil', '085346577564', '082178696789', 'Jalan Spens Bersatu', 11, '2021-05-19', 176000, 1, 1, 0, '2021-05-24'),
+(543676579, 'Kaith', 'Ky', '081221122112', '082112211221', 'Tengkiyu Foreva Street', 1, '2021-05-19', 139000, 2, 6, 0, '2021-05-24');
+
 -- --------------------------------------------------------
 
 --
@@ -109,8 +143,8 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id_status`, `namaStatus`) VALUES
-('0', 'On Process'),
-('1', 'Delivered');
+(0, 'On Process'),
+(1, 'Delivered');
 
 -- --------------------------------------------------------
 
@@ -130,9 +164,9 @@ CREATE TABLE `tipe` (
 --
 
 INSERT INTO `tipe` (`id_tipe`, `namaTipe`, `hargaTipe`, `lama`) VALUES
-('1', 'REG', 2, 5),
-('2', 'FLASH', 3, 3),
-('3', 'INSTANT', 4, 1);
+(1, 'REG', 2, 5),
+(2, 'FLASH', 3, 3),
+(3, 'INSTANT', 4, 1);
 
 --
 -- Indexes for dumped tables
